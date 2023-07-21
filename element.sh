@@ -14,11 +14,11 @@ else
   ARGUMENT="'$1'"
   WHERE_CLAUSE="WHERE e.symbol = $ARGUMENT or e.name = $ARGUMENT"
 fi
-echo $WHERE_CLAUSE
-echo "select e.atomic_number, e.symbol, e.name, 
-melting_point_celsius, boiling_point_celsius, atomic_mass, type
-from elements e join properties using(atomic_number)
-join types using(type_id) $WHERE_CLAUSE"
+# echo $WHERE_CLAUSE
+# echo "select e.atomic_number, e.symbol, e.name, 
+# melting_point_celsius, boiling_point_celsius, atomic_mass, type
+# from elements e join properties using(atomic_number)
+# join types using(type_id) $WHERE_CLAUSE"
 
 ELEMENT=$($PSQL "select e.atomic_number, e.symbol, e.name, 
 melting_point_celsius, boiling_point_celsius, atomic_mass, type
@@ -30,10 +30,15 @@ IFS='|'
 # Read the result into variables
 read ATOMIC_NUMBER SYMBOL NAME MELTING_POINT BOILING_POINT ATOMIC_MASS TYPE <<< $ELEMENT
 
-echo $NAME
+if [[ $NAME ]]
+then
+echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
+else
+echo "I could not find that element in the database."
 fi
+fi
+
 
 }
 MENU $1
 
-# The element with atomic number 1 is Hydrogen (H). It's a nonmetal, with a mass of 1.008 amu. Hydrogen has a melting point of -259.1 celsius and a boiling point of -252.9 celsius.
