@@ -32,9 +32,9 @@ read ATOMIC_NUMBER SYMBOL NAME MELTING_POINT BOILING_POINT ATOMIC_MASS TYPE <<< 
 
 if [[ $NAME ]]
 then
-echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
+  echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
 else
-echo "I could not find that element in the database."
+  echo "I could not find that element in the database."
 fi
 fi
 
